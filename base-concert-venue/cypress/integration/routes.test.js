@@ -18,6 +18,18 @@ it("display correct heading when navigating to bands route", () => {
   }).should("exist");
 });
 
-it("reset the db", () => {
-  cy.task("db:reset");
+it("displays correct band name for band route that existed at build time", () => {
+  cy.task("db:reset").visit("/bands/1");
+  cy.findByRole("heading", {
+    name: /Shamrock Pete/i,
+  }).should("exist");
+});
+
+// it("reset the db", () => {
+//   cy.task("db:reset");
+// });
+
+it("displays error for band not in db", () => {
+  cy.task("db:reset").visit("/bands/12345");
+  cy.findByText(/error: band not found/i).should("exist");
 });
