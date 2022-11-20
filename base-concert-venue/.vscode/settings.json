@@ -15,5 +15,9 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "editor.tabSize": 2,
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+  },
+  "files.autoSave": "onFocusChange",
 }
