@@ -7,3 +7,13 @@ it("display correct heading when navigating to shows route", () => {
     name: /upcoming shows/i,
   }).should("exist");
 });
+
+it("display correct heading when navigating to bands route", () => {
+  cy.visit("/");
+  cy.findByRole("button", {
+    name: /bands/i,
+  }).click();
+  cy.findByRole("heading", {
+    name: /Our Illustrious Performers/i,
+  }).should("exist");
+});
