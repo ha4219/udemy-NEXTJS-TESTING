@@ -14,6 +14,8 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resetDB } = require("../../__tests__/__mocks__/db/utils/reset-db");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { addBand } = require("../../lib/features/bands/queries");
 
 /**
  * @type {Cypress.PluginConfig}
@@ -24,5 +26,6 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
   on("task", {
     "db:reset": () => resetDB().then(() => null),
+    addBand: (newBand) => addBand(newBand).then(() => null),
   });
 };
