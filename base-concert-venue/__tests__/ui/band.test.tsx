@@ -14,3 +14,12 @@ test("band component displays correct band information", async () => {
 
   // more tests here...
 });
+
+test("bnad component null", async () => {
+  render(<BandComponent band={null} error="EVERYTHING IS FINE" />);
+
+  const error = screen.getByRole("heading", {
+    name: /EVERYTHING IS FINE/i,
+  });
+  expect(error).toBeInTheDocument();
+});
