@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import { Reservation } from "@/components/reservations/Reservation";
+import { UserReservations } from "@/components/user/UserReservations";
 
 test("reservation page shows correct number of available seats", async () => {
   render(<Reservation showId={0} submitPurchase={jest.fn()} />);
@@ -21,4 +22,18 @@ test("reservation page shows 'sold out' message and NO purchage button if there 
     name: /purchase/i,
   });
   expect(purchaseButton).not.toBeInTheDocument();
+});
+
+test("Displays no reservations and 'purchase' button when no reservations exist", async () => {
+  render(<UserReservations userId={0} />);
+
+  const purchaseButton = await screen.findByRole("button", {
+    name: /purchase tickets/i,
+  });
+  expect(purchaseButton).toBeInTheDocument();
+
+  const ticketsHeading = screen.queryByRole("heading", {
+    name: /your tickets/i,
+  });
+  expect(ticketsHeading).not.toBeInTheDocument();
 });

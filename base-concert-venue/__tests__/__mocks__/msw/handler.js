@@ -14,7 +14,10 @@ export const handlers = [
     // index / showId = 1 has NO seats available
     return res(ctx.json({ show: fakeShows[showId] }));
   }),
-  rest.get(`${baseURL}/api/users/:userId/reservations`, (req, res, ctx) =>
-    res(ctx.json({ userReservations: fakeUserReservations }))
-  ),
+  rest.get(`${baseURL}/api/users/:userId/reservations`, (req, res, ctx) => {
+    const { userId } = req.params;
+
+    const userReservations = Number(userId) === 1 ? fakeUserReservations : [];
+    return res(ctx.json({ userReservations }));
+  }),
 ];
