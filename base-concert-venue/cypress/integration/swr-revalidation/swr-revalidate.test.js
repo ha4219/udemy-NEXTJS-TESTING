@@ -54,7 +54,7 @@ describe("swr revalidate test", () => {
     cy.findByText(/10 seats left/i).should("exist");
 
     // advance clock 30 seconds more; now sold out show should display
-    cy.tick(THIRTY_SECONDS);
+    cy.tick(FIFTEEN_SECONDS);
     cy.findByText(/8 seats left/i).should("exist");
   });
 });
