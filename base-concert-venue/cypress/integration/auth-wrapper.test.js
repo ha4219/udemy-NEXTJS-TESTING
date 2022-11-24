@@ -81,3 +81,28 @@ it("runs auth flow for protected user page, including failed sign in", () => {
 
   cy.findByRole("button", { name: /sign in/i }).should("not.exist");
 });
+
+it("redirects to sign-in for protected pages", () => {
+  cy.fixture("protected-pages.json").then((urls) => {
+    urls.forEach(($url) => {
+      cy.visit($url);
+      cy.findByLabelText(/email address/i).should("exist");
+      cy.findByLabelText(/password/i).should("exist");
+    });
+  });
+});
+
+it("does not show sign-in page when already signed in", () => {
+  cy.task("db:reset").signIn(
+    Cypress.env("TEST_USER_EMAIL"),
+    Cypress.env("TEST_PASSWORD")
+  );
+
+  cy.visit("/reservations/0");
+
+  cy.findByRole("heading", {
+    name: /sign in to your account/i,
+  }).should("not.exist");
+
+  cy.findByRole("button", { name: /purchase/i }).should("exist");
+});
