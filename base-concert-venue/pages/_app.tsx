@@ -33,7 +33,7 @@ export default function PopularMusicVenue({
             </Auth>
           ) : (
             <Component {...pageProps} />
-          )}{" "}
+          )}
         </Layout>
       </ChakraProvider>
     </SessionProvider>
