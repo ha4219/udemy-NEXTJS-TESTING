@@ -11,5 +11,6 @@ test("test", async () => {
   const btn = await screen.findByRole("button", {
     name: /Purchase more tickets/i,
   });
+
   expect(btn).toBeInTheDocument();
 });
